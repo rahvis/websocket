@@ -164,6 +164,35 @@ While adding a backplane improves scalability, it introduces additional moving p
 
 Scaling WebSockets requires careful planning, especially around managing persistent connections, synchronizing state across nodes, and broadcasting messages effectively. Leveraging solutions like Redis or pub/sub systems can mitigate these challenges, but they add complexity to the overall system design.
 
+## Horizontal Scaling and Its Complexities
+
+Horizontal scaling introduces additional complexities compared to vertical scaling. While it provides the ability to expand your system's capacity effectively, achieving this requires careful architectural planning and infrastructure management.
+
+### Key Challenges of Horizontal Scaling
+1. **Complex Architecture:**  
+   Horizontal scaling demands a more sophisticated system design. Instead of relying on a single powerful server, multiple servers must be organized to handle incoming requests efficiently.
+
+2. **Infrastructure Management:**  
+   Managing multiple WebSocket servers requires tools and processes to monitor performance, ensure uptime, and manage deployments effectively.
+
+3. **Load Balancing:**  
+   To distribute traffic evenly across multiple servers, a load balancer is essential. This component ensures that no single server becomes overwhelmed, improving both performance and reliability.
+
+4. **Data Synchronization:**  
+   One of the biggest challenges in horizontal scaling is ensuring that message data and connection state are synchronized across all WebSocket servers. Since WebSocket connections are persistent, maintaining real-time consistency across servers must happen within milliseconds to prevent data loss or duplication.
+
+Despite these complexities, horizontal scaling is highly beneficial. It offers the potential for **limitless scalability** (in theory), making it a more flexible and powerful solution than vertical scaling. Instead of focusing on **"How many connections can my server handle?"**, a better question is:  
+**"How many servers can I distribute the workload to?"**
+
+### Importance of Elasticity in Scaling
+Beyond implementing horizontal scaling, **elasticity** is crucial to maintaining system stability under unpredictable traffic patterns. The public internet is inherently volatile, and traffic spikes can occur suddenly. If your server layer is **inelastic**, these sudden surges may overwhelm your system, causing downtime or performance degradation.
+
+To address this, your system should be designed to:
+
+- **Dynamically scale up** by adding more servers when traffic increases.  
+- **Scale down** during low-traffic periods to optimize costs.  
+
+By ensuring your WebSocket infrastructure is both **scalable** and **elastic**, you can build a robust system capable of handling real-time communication at scale with minimal disruption.
 
 
 
